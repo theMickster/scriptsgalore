@@ -1,0 +1,22 @@
+services:
+  microsoftSqlServer:
+    platform: linux/amd64
+    container_name: tosk-mssql
+    hostname: tosk
+    restart: unless-stopped
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    volumes:
+      - tosksql:/var/opt/mssql
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_PID: 'Developer'
+      MSSQL_BACKUP_DIR: /var/opt/mssql/backup
+      MSSQL_DATA_DIR: /var/opt/mssql/data"
+      MSSQL_LOG_DIR: /var/opt/mssql/log"
+      MSSQL_TCP_PORT: 1433 
+
+volumes:
+  tosksql:
